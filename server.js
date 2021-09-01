@@ -14,8 +14,8 @@ const client = new tmi.Client({
 	channels: [ process.env.TWITCH_CHANNEL ]
 });
 
-client.connect();
 const entires={};
+client.connect();
 client.on('message', (channel, tags, message, self) => {
 	// Ignore echoed messages.
 	if(self) return;
