@@ -19,6 +19,6 @@
   "homepage": "https://github.com/vulture990/Twitch-bot#readme",
   "dependencies": {
     "dotenv": "^10.0.0",
-    "tmi.js": "^1.8.5"
+    "tmi.js": "^1.7.5"
   }
 }

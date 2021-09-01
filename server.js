@@ -1,17 +1,12 @@
 require('dotenv').config();
-
-const commands = {
-	website: {
-	  response: 'https://salbi.me'
-	},
-	upvote: {
-	  response: (argument) => `Successfully upvoted ${argument}`
-	}
-  }
-const regexpCommand = new RegExp(/^!([a-zA-Z0-9]+)(?:\W+)?(.*)?/);
 const tmi = require('tmi.js');
+const { username } = require('tmi.js/lib/utils');
+
 const client = new tmi.Client({
-	connection: { reconnect: true },
+	options: { debug: true },
+	connection: {
+		reconnect: true,
+	},
 	identity: {
 		username: process.env.TWITCH_BOT_USERNAME,
 		password: process.env.TWITCH_OAUTH_TOKEN
@@ -20,26 +15,22 @@ const client = new tmi.Client({
 });
 
 client.connect();
+const entires={};
+client.on('message', (channel, tags, message, self) => {
+	// Ignore echoed messages.
+	if(self) return;
+	const isAdmin=tags.username ===process.env.TWITCH_BOT_USERNAME;
 
-client.on('message',async (channel, context, message) => {
-	const notBot = context.username.toLowerCase() !== process.env.TWITCH_BOT_USERNAME.toLowerCase();
-	if(!notBot) return;
-	const [raw, command, argument] = message.match(regexpCommand);
+	if(message.toLowerCase() === '!entries') {
+		// "@alca, heya!"
+		client.say(channel, `@${tags.username}, You've Entred!`);
+		entires[tags.username]=username;
+		// store the users who enter the command for entries
 
-	const { response } = commands[command] || {};
-  
-	const responseMessage = response;
-  
-	if ( typeof responseMessage === 'function' ) {
-	  responseMessage = response(argument);
+	}else if(message==='!pickWinner' && isAdmin){
+		const entriesArray=Object.keys(entires);
+		const winner=entriesArray[Math.floor(Math.random()*entriesArray.length)];
+		client.say(channel, `Yo Congrats , @${winner}, you are the winner!`);
+		// and this is just picking a random user from the array of users who enter the command
 	}
-  
-	if ( responseMessage ) {
-		// the only thing left is a string so we should be fine
-	  console.log(`Responding to command !${command}`);
-	  client.say(channel, responseMessage);
-	}
-
-	
 });
-			
