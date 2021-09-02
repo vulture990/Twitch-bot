@@ -38,7 +38,7 @@ client.on('message', (channel, tags, message, self) => {
 	// Ignore echoed messages.
 	if(self) return;
 	
-	if(message.toLowerCase() ==='!spits' && isAdmin){
+	if(message.toLowerCase() ==='!spits' ){
 		botSpitsOutRandomString(channel);
 	}
 	// setInterval(function botSpitsOutRandomString(length) {
