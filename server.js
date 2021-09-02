@@ -37,13 +37,15 @@ client.connect();
 client.on('message', (channel, tags, message, self) => {
 	// Ignore echoed messages.
 	if(self) return;
-	botSpitsOutRandomString(5,channel);
+	if(message.toLowerCase() ==='!spits'){
+		botSpitsOutRandomString(5,channel);
+	}
 	// setInterval(function botSpitsOutRandomString(length) {
 	// 	latestRandomeString = makeRandomString(length);
 	// 	client.say(channel,latestRandomString);
 	// },timer);
 	const isAdmin=tags.username ===process.env.TWITCH_BOT_USERNAME;
-	if(message=='!'+latestRandomString ){
+	if(message ==='!'+latestRandomString ){
 		client.say(channel, `Yo Congrats , @${tags.username}, you Got it,you Won!`);
 	}
 
