@@ -17,7 +17,7 @@ var timer=60*1000*5;//5 minutes
 
 function botSpitsOutRandomString(length,channel) {
 		latestRandomeString = makeRandomString(length);
-		client.say(channel,latestRandomString);
+		client.say(channel,makeRandomString(length));
 }
 
 const client = new tmi.Client({
