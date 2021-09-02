@@ -14,10 +14,9 @@ function makeRandomString(length) {
 var timer=60*1000*5;//5 minutes
 
 
-var latestRandomString = makeRandomString(length);
-function botSpitsOutRandomString(length,channel) {
+var latestRandomString = makeRandomString(5);
+function botSpitsOutRandomString(channel) {
 	client.say(channel,latestRandomString);
-	
 }
 
 const client = new tmi.Client({
@@ -39,14 +38,14 @@ client.on('message', (channel, tags, message, self) => {
 	if(self) return;
 	
 	if(message.toLowerCase() ==='!spits'){
-		botSpitsOutRandomString(5,channel);
+		botSpitsOutRandomString(channel);
 	}
 	// setInterval(function botSpitsOutRandomString(length) {
 	// 	latestRandomeString = makeRandomString(length);
 	// 	client.say(channel,latestRandomString);
 	// },timer);
 	const isAdmin=tags.username ===process.env.TWITCH_BOT_USERNAME;
-	if(message ==='!'+latestRandomString ){
+	if(message ===latestRandomString ){
 		client.say(channel, `Yo Congrats , @${tags.username}, you Got it,you Won!`);
 	}
 
