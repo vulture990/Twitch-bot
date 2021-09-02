@@ -46,20 +46,21 @@ client.on('message', (channel, tags, message, self) => {
 	// },timer);
 	const isAdmin=tags.username ===process.env.TWITCH_BOT_USERNAME;
 	if(message ===latestRandomString ){
-		client.say(channel, `Yo Congrats , @${tags.username}, you Got it,you Won!`);
+		client.say(channel, `Yo Congrats , @${tags.username}, you Got it,you type !entries to be Entred !`);
+		
+			if(message.toLowerCase() === '!entries') {
+				client.say(channel, `@${tags.username}, You've Entred!`);
+				entires[tags.username]=username;
+				// store the users who enter the command for entries
+		
+			}else if(message==='!pickWinner' && isAdmin){
+				const entriesArray=Object.keys(entires);
+				const winner=entriesArray[Math.floor(Math.random()*entriesArray.length)];
+				client.say(channel, `Yo Congrats , @${winner}, you are the winner!`);
+				// and this is just picking a random user from the array of users who enter the command
+			}
 	}
-
-	if(message.toLowerCase() === '!entries') {
-		client.say(channel, `@${tags.username}, You've Entred!`);
-		entires[tags.username]=username;
-		// store the users who enter the command for entries
-
-	}else if(message==='!pickWinner' && isAdmin){
-		const entriesArray=Object.keys(entires);
-		const winner=entriesArray[Math.floor(Math.random()*entriesArray.length)];
-		client.say(channel, `Yo Congrats , @${winner}, you are the winner!`);
-		// and this is just picking a random user from the array of users who enter the command
-	}
+//only those who got it will be able to !entries
 });
 
 //the bot has to write a random code to the channel every n-minutes
