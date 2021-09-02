@@ -1,6 +1,6 @@
 require('dotenv').config();
 const tmi = require('tmi.js');
-const { username } = require('tmi.js/lib/utils');
+const { username, toNumber } = require('tmi.js/lib/utils');
 const latestRandomString='';
 function makeRandomString(length) {
     var result           = '';
@@ -17,7 +17,7 @@ var timer=60*1000*5;//5 minutes
 
 function botSpitsOutRandomString(length,channel) {
 		latestRandomeString = makeRandomString(length);
-		client.say(channel,makeRandomString(length));
+		client.say(channel,latestRandomeString);
 }
 
 const client = new tmi.Client({
@@ -37,6 +37,7 @@ client.connect();
 client.on('message', (channel, tags, message, self) => {
 	// Ignore echoed messages.
 	if(self) return;
+	
 	if(message.toLowerCase() ==='!spits'){
 		botSpitsOutRandomString(5,channel);
 	}
