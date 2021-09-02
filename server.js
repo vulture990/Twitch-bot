@@ -32,6 +32,7 @@ const client = new tmi.Client({
 });
 
 const entires={};
+const winningUsers={};
 client.connect();
 client.on('message', (channel, tags, message, self) => {
 	// Ignore echoed messages.
@@ -46,11 +47,14 @@ client.on('message', (channel, tags, message, self) => {
 	// },timer);
 	const isAdmin=tags.username ===process.env.TWITCH_BOT_USERNAME;
 	if(message ===latestRandomString ){
+		winningUsers[tags.username]=username;
 		client.say(channel, `Yo Congrats , @${tags.username}, you Got it,you type !entries to be Entred !`);
 		
 	}
+	const winnersArray=Object.keys(entires);
+	console.log('winner:',winnersArray);
 	//only those who got it will be able to !entries
-	if(message.toLowerCase() === '!entries') {
+	if(message.toLowerCase() === '!entries'  ) {
 		client.say(channel, `@${tags.username}, You've Entred!`);
 		entires[tags.username]=username;
 		// store the users who enter the command for entries
