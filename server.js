@@ -14,8 +14,9 @@ function makeRandomString(length) {
 var timer=60*1000*5;//5 minutes
 
 
-var latestRandomString = makeRandomString(5);
-function botSpitsOutRandomString(channel) {
+var latestRandomString ;
+function botSpitsOutRandomString(channel,len) {
+	latestRandomString=makeRandomString(len);
 	client.say(channel,latestRandomString);
 }
 
@@ -38,8 +39,11 @@ client.on('message', (channel, tags, message, self) => {
 	// Ignore echoed messages.
 	if(self) return;
 	
-	if(message.toLowerCase() ==='!spits' ){
-		botSpitsOutRandomString(channel);
+	
+	if(message.toLowerCase().includes('!spits ')){
+		var retrievedLength=message.toLowerCase().replace('!spits ','');
+
+		botSpitsOutRandomString(channel,Number(retrievedLength));
 	}
 	// setInterval(function botSpitsOutRandomString(length) {
 	// 	latestRandomeString = makeRandomString(length);
