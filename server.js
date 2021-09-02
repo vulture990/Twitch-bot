@@ -1,24 +1,23 @@
 require('dotenv').config();
 const tmi = require('tmi.js');
 const { username } = require('tmi.js/lib/utils');
-var latestRandomString='';
 function makeRandomString(length) {
-    var result           = '';
+	var result           = '';
     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;
     for ( var i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * 
- charactersLength));
-   }
-   return result;
+		result += characters.charAt(Math.floor(Math.random() * 
+		charactersLength));
+	}
+	return result;
 }
 var timer=60*1000*5;//5 minutes
 
 
+var latestRandomString = makeRandomString(length);
 function botSpitsOutRandomString(length,channel) {
-		latestRandomeString = makeRandomString(length);
-		client.say(channel,latestRandomeString);
-		
+	client.say(channel,latestRandomString);
+	
 }
 
 const client = new tmi.Client({
@@ -40,11 +39,7 @@ client.on('message', (channel, tags, message, self) => {
 	if(self) return;
 	
 	if(message.toLowerCase() ==='!spits'){
-		latestRandomeString = makeRandomString(5);
-		client.say(channel,latestRandomeString);
-
-
-		// botSpitsOutRandomString(5,channel);
+		botSpitsOutRandomString(5,channel);
 	}
 	// setInterval(function botSpitsOutRandomString(length) {
 	// 	latestRandomeString = makeRandomString(length);
