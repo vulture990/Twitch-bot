@@ -51,10 +51,10 @@ client.on('message', (channel, tags, message, self) => {
 		client.say(channel, `Yo Congrats , @${tags.username}, you Got it,you type !entries to be Entred !`);
 		
 	}
-	const winnersArray=Object.keys(entires);
+	const winnersArray=Object.keys(winningUsers);
 	console.log('winner:',winnersArray);
 	//only those who got it will be able to !entries
-	if(message.toLowerCase() === '!entries'  ) {
+	if(message.toLowerCase() === '!entries' && winnersArray.includes(tags.username)) {
 		client.say(channel, `@${tags.username}, You've Entred!`);
 		entires[tags.username]=username;
 		// store the users who enter the command for entries
