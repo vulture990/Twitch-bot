@@ -15,7 +15,7 @@ function makeRandomString(length) {
 var timer=60*1000*5;//5 minutes
 
 
-function botSpitsOutRandomString(length) {
+function botSpitsOutRandomString(length,channel) {
 		latestRandomeString = makeRandomString(length);
 		client.say(channel,latestRandomString);
 }
@@ -37,7 +37,7 @@ client.connect();
 client.on('message', (channel, tags, message, self) => {
 	// Ignore echoed messages.
 	if(self) return;
-	botSpitsOutRandomString(5);
+	botSpitsOutRandomString(5,channel);
 	// setInterval(function botSpitsOutRandomString(length) {
 	// 	latestRandomeString = makeRandomString(length);
 	// 	client.say(channel,latestRandomString);
