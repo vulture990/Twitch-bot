@@ -10,9 +10,15 @@ const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology:
 
 function connect(callback) {
   MongoClient.connect(url, { useNewUrlParser: true }, (err, res) => {
-    const db = res.db(dbName);
-    database = db;
-    return callback(err);
+      try{
+          
+          const db = res.db(dbName);
+          database = db;
+      }
+      catch(err)
+      {
+          console.log(err);
+      }
   });
 }
 
