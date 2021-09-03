@@ -1,4 +1,5 @@
 require('dotenv').config();
+
 const tmi = require('tmi.js');
 const { username } = require('tmi.js/lib/utils');
 function makeRandomString(length) {
@@ -31,18 +32,33 @@ const client = new tmi.Client({
 	},
 	channels: [ process.env.TWITCH_CHANNEL ]
 });
+const reputation ={};
+const reputationRegex = /(\+\+|--)/g;
 
 const entires={};
 const winningUsers={};
 client.connect();
 client.on('message', (channel, tags, message, self) => {
+	if(reputationRegex.test('!'+ message)) {
+		const [user, operator] = message.split(reputationRegex);
+	
+		if(!(user in reputation)) {
+		  reputation[user] = 0;
+		}
+	
+		if(operator === '++') {
+		  reputation[user]++;
+		} else {
+		  reputation[user]--;
+		}
+	
+		client.say(channel, `@${tags.username}, ${user} now has a reputation of ${reputation[user]}`);
+		return;
+	  }
 	// Ignore echoed messages.
-	if(self) return;
-	
-	
+	if(self || !message.startsWith('!') ) return;
 	if(message.toLowerCase().includes('!spits ')){
 		var retrievedLength=message.toLowerCase().replace('!spits ','');
-
 		botSpitsOutRandomString(channel,Number(retrievedLength));
 	}
 	// setInterval(function botSpitsOutRandomString(length) {
@@ -73,3 +89,4 @@ client.on('message', (channel, tags, message, self) => {
 
 //the bot has to write a random code to the channel every n-minutes
 //the first viewer to type the random code wins the prize
+
