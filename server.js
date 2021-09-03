@@ -281,7 +281,7 @@ function twitchPrimeReminder(channel) {
   /* DATABSE FUNCTIONS */
   
   async function addChannelHandler(channel, userstate) {
-	if (channel !== "vulturebots") {
+	if (channel !== "vulturebot1") {
 	  return;
 	} else {
 	  const msg = await mongo.addChannel(userstate.username);
@@ -293,7 +293,7 @@ function twitchPrimeReminder(channel) {
   }
   
   async function removeChannelHandler(channel, userstate) {
-	if (channel !== "vulturebots") {
+	if (channel !== "vulturebot1") {
 	  return;
 	} else {
 	  const msg = await mongo.removeChannel(userstate.username);
