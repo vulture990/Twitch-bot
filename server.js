@@ -340,7 +340,13 @@ function twitchPrimeReminder(channel) {
   }
   
   async function listAllCommandsHandler(channel, userstate) {
-	const res = await mongo.getCommands(channel);
+	  try{
+
+		  const res = await mongo.getCommands(channel);
+	  }
+	  catch(e){
+		console.log(e);
+	  }
 	const msg = `@${userstate.username}, commands: ${res}`;
   
 	client
