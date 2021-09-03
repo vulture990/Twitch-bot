@@ -70,7 +70,7 @@ function onMessage(chan, userstate, message, self) {
 		reputationPoints(message,userstate,chan);
 	}
 	if (msg === "!title") {
-		
+
 	  titleHandler(channel, userstate);
 	} else if (msg === "!followage") {
 	  followageHandler(channel, userstate);
@@ -206,7 +206,7 @@ function twitchPrimeReminder(channel) {
   //CHAT HELP COMMAND !help
   
   function helpHandler(channel, userstate) {
-	const msg = `@${userstate.username}, command documentation can be found here: https://github.com/vulture990`;
+	const msg = `@${userstate.username}, command documentation can be found here: https://github.com/vulture990/Twitch-Bot-Documentation/blob/main/README.md`;
 	client
 	  .say(channel, msg)
 	  .then(channel => console.log(channel))
