@@ -70,6 +70,7 @@ function onMessage(chan, userstate, message, self) {
 		reputationPoints(message,userstate,chan);
 	}
 	if (msg === "!title") {
+		
 	  titleHandler(channel, userstate);
 	} else if (msg === "!followage") {
 	  followageHandler(channel, userstate);
