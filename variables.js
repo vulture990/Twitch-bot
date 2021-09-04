@@ -19,5 +19,5 @@ module.exports = {
     },
     clientID: "gp762nuuoqcoxypju8c569th9wz7q5", // CLIENT ID FOR API CALLS FROM https://dev.twitch.tv/
     oauthToken: "iolyck7x2n4x9ni7bbgf1svjs8858e", //OAUTH TOKEN FOR API CALLS FROM https://dev.twitch.tv/ from OAuth 2.0 Authorization Code Flow
-    dbLink: "mongodb+srv://vulture:vulture-066842@cluster0.jwl1i.mongodb.net/Project 0?retryWrites=true&w=majority"
+   
 };
